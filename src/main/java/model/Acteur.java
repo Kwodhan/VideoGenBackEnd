@@ -13,12 +13,20 @@ public class Acteur {
     private Long id;
     private String prenom;
     private String nom;
+    private String locationIntro;
 
     Set<Film> films = new HashSet<>();
 
     public Acteur() {
     }
 
+    public String getLocationIntro() {
+        return locationIntro;
+    }
+
+    public void setLocationIntro(String locationIntro) {
+        this.locationIntro = locationIntro;
+    }
 
     public String getPrenom() {
         return prenom;

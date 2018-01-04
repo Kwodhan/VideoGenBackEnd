@@ -14,9 +14,19 @@ public class Film {
 
     private String nom;
 
+    private String locationAnswer;
+
     Set<ExtraitFilm> extraitFilms = new HashSet<>();
 
     Set<Acteur> acteurs = new HashSet<>();
+
+    public String getLocationAnswer() {
+        return locationAnswer;
+    }
+
+    public void setLocationAnswer(String locationAnswer) {
+        this.locationAnswer = locationAnswer;
+    }
 
     public String getNom() {
         return nom;

@@ -36,6 +36,7 @@
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.36" level="project" />
     <orderEntry type="library" name="Maven: com:videogen:1.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.4" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.emf:ecore:2.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-web:1.5.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:1.5.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:1.5.4.RELEASE" level="project" />
