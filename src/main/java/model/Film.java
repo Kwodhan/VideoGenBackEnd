@@ -16,6 +16,8 @@ public class Film {
 
     private String locationAnswer;
 
+    private String locationImage;
+
     Set<ExtraitFilm> extraitFilms = new HashSet<>();
 
     Set<Acteur> acteurs = new HashSet<>();
@@ -65,5 +67,14 @@ public class Film {
 
     public void setActeurs(Set<Acteur> acteurs) {
         this.acteurs = acteurs;
+    }
+
+    @JsonIgnore
+    public String getLocationImage() {
+        return locationImage;
+    }
+
+    public void setLocationImage(String locationImage) {
+        this.locationImage = locationImage;
     }
 }

@@ -37,24 +37,7 @@ public class GeneratorController {
 
 
 
-    @RequestMapping(value = "downloadFile", method = RequestMethod.GET)
-    public StreamingResponseBody getSteamingFile(@RequestParam("acteur") long idActeur,
-                                                 @RequestParam("film") long idFilm, HttpServletResponse response) throws IOException {
-        response.setContentType("video/mp4");
-        response.setHeader("Content-Disposition", "attachment; filename=\"pirates2a.mp4\"");
-        Acteur acteur = acteurService.findById(idActeur);
-        Film film = filmService.findById(idFilm);
-        String path = extraitFilmService.getExtraitFilmsByNameAndActor(film,acteur).iterator().next().getLocation();
-        InputStream inputStream = new FileInputStream(new File("/home/aferey/IdeaProjects/server"+path));
-        return outputStream -> {
-            int nRead;
-            byte[] data = new byte[1024];
-            while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
-                System.out.println("Writing some bytes..");
-                outputStream.write(data, 0, nRead);
-            }
-        };
-    }
+
 
     @RequestMapping(value = "/request", method = RequestMethod.GET,produces = MediaType.TEXT_PLAIN_VALUE)
     @ResponseBody
@@ -88,11 +71,14 @@ public class GeneratorController {
         // question 1
         videoGen +=  addQuestion(film1,acteur);
 
+        videoGen += addTransitionReponse(1);
         // answer
         videoGen +=  addAnswer(film1,acteur);
 
         // question 2
         videoGen +=  addQuestion(film2,acteur);
+
+        videoGen += addTransitionReponse(2);
 
         // answer
         videoGen +=  addAnswer(film2,acteur);
@@ -100,6 +86,7 @@ public class GeneratorController {
         // question 3
         videoGen +=  addQuestion(film3,acteur);
 
+        videoGen += addTransitionReponse(3);
         // answer
         videoGen +=  addAnswer(film3,acteur);
 
@@ -108,7 +95,7 @@ public class GeneratorController {
         System.out.println(videoGen);
         Date date = Calendar.getInstance().getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("MMdd_HHmmss_SSS");
-        String location = "/home/aferey/VideoGen/"+sdf.format(date)+".videogen";
+        String location = "/tmp/"+sdf.format(date)+".videogen";
         writeFile(location,videoGen);
         VideoGeneratorModel video = new VideoGenHelper().loadVideoGenerator(location);
         Generator generetor = new Generator();
@@ -117,7 +104,7 @@ public class GeneratorController {
             System.out.println("error");
             return null;
         }
-        String locationVideo = "/home/aferey/VideoGen/"+sdf.format(date)+".mp4";
+        String locationVideo = "/tmp/"+sdf.format(date)+".mp4";
         generetor.generate(video,locationVideo);
         response.setContentType("video/mp4");
         response.setHeader("Content-Disposition", "attachment; filename=\"MyQuizz.mp4"+"\"");
@@ -161,7 +148,21 @@ public class GeneratorController {
         String videoGen ="mandatory videoseq ";
         String id = acteur.getNom()+"_Intro ";
         videoGen += id;
-        videoGen += "\"" +acteur.getLocationIntro()+"\"\n";
+        videoGen += "\"" +acteur.getLocationIntro()+"\" { filter b&w text { content \""+acteur.getPrenom() +acteur.getNom()+"\" position BOTTOM color \"WHITE\" size 84 } }\n";
+
+        return videoGen;
+
+    }
+
+    private String addTransitionQuestion(Integer numero, String string) {
+        String videoGen ="mandatory videoseq "+"transitionQ_"+numero+" \"~/Video/trans.mp4\" { text { content \""+string+"\" position CENTER color \"WHITE\" size 104 } }\n";
+
+        return videoGen;
+
+    }
+
+    private String addTransitionReponse(Integer numero) {
+        String videoGen ="mandatory videoseq "+ "transitionR_"+numero+" \"~/Video/trans.mp4\" { filter negate text { content \"Réponse:\" position CENTER color \"BLACK\" size 104 } }\n";
 
         return videoGen;
 
