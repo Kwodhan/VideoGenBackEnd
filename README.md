@@ -28,3 +28,7 @@ grunt serve
 ## Modification
 
 Si vous voulez compiler le projet ,il faudra mettre le dossier com (qui contient la librairie VideoGenTools) du repertoire dans votre répértoire local .m2 .
+
+## Warning
+
+Les Dockerfiles ne fonctionnent pas
