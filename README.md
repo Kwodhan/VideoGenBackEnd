@@ -7,22 +7,22 @@ Accessible depuis le port 8080
 
 git clone https://github.com/Kwodhan/VideoGenBackEnd
 
-**Mise en place des médias**
+**Mise en place des médias**      
 On met le dossier “Video” dans le bon emplacement dans le répertoire home de l’utilisateur (~). Le dossier “Video” est présent dans le dossier du répertoire git.
 
-**Lancement de la BDD HSql**
+**Lancement de la BDD HSql**      
 ./run-hsqldb-server.sh
 
-**Lancement du serveur**
+**Lancement du serveur**      
 ./java -jar server-1.0.jar
 
 ### FrontEnd
 Accessible depuis le port 9000
 
-**Répertoire du projet FrontEnd**
+**Répertoire du projet FrontEnd**      
 git clone https://github.com/Kwodhan/VideoGenFrontEnd
 
-**Lancement du serveur**
+**Lancement du serveur**      
 grunt serve
 
 ## Modification
